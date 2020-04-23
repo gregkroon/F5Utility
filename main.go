@@ -8,8 +8,6 @@ import (
 	gjson "github.com/tidwall/gjson"
 )
 
-
-
 func main() {
 
 	client := resty.New()
@@ -46,15 +44,13 @@ func main() {
 	//fmt.Println(err)
 	//fmt.Println(resp)
 
-	//}
+	//} GIT test
+
 	disablepool(token.(string))
 
 }
 
-
 func disablepool(tokenarg string) {
-
-
 
 	type Items struct {
 		Items string `json:"Items"`
@@ -84,7 +80,5 @@ func disablepool(tokenarg string) {
 		fmt.Println(resp)
 		return true // keep iterating
 	})
-
-
 
 }
