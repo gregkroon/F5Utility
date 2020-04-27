@@ -8,4 +8,4 @@ for the purposes of Blue/Green style deployments .
 
 ## Example usage
 
--poolname PoolA -action disablepool -username admin -password 7642098@ -host 10.1.1.170:8443
+-poolname PoolA -action disablepool -username admin -password ******* -host 10.1.1.170:8443
