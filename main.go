@@ -18,7 +18,6 @@ func main() {
 	var passwordflag = flag.String("password", "*******", "Password for F5")
 	var hostflag = flag.String("host", "10.1.1.1", "F5 hostname and port combination ")
 
-	//fmt.Println(os.Args[0],os.Args[1],os.Args[2])
 	flag.Parse()
 
 	fmt.Println(*poolnameflag)
@@ -57,8 +56,6 @@ func auth(username string, password string, host string) string {
 	var token interface{}
 	token = result["token"].(map[string]interface{})["token"]
 
-	//fmt.Println(token)
-	//tokenstring := token
 	str := fmt.Sprintf("%v", token)
 	return str
 }
@@ -75,14 +72,9 @@ func disablepool(tokenarg string, poolname string, host string) {
 
 	fmt.Println(resp)
 
-	//json.Unmarshal([]byte(resp.Body()), &items)
-
 	result := gjson.Get(resp.String(), "items.#.name")
-	//println(value.String())
 
 	fmt.Println(err)
-	//fmt.Println(items)
-	//fmt.Println(members.Name)
 
 	result.ForEach(func(key, value gjson.Result) bool {
 		println(value.String())
@@ -100,22 +92,15 @@ func enablepool(tokenarg string, poolname string, host string) {
 		Items string `json:"Items"`
 	}
 
-	//var items Items
-
 	client := resty.New()
 	client.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 	resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{}`).Get("https://" + host + "/mgmt/tm/ltm/pool/~Common~" + poolname + "/members")
 
 	fmt.Println(resp)
 
-	//json.Unmarshal([]byte(resp.Body()), &items)
-
 	result := gjson.Get(resp.String(), "items.#.name")
-	//println(value.String())
 
 	fmt.Println(err)
-	//fmt.Println(items)
-	//fmt.Println(members.Name)
 
 	result.ForEach(func(key, value gjson.Result) bool {
 		println(value.String())
