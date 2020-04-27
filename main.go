@@ -12,7 +12,8 @@ import (
 
 func main() {
 
-	var actionflag = flag.String("action", "enable", "Enable or Disable F5 pool members")
+	var poolnameflag = flag.String("poolname", "default", "F5 pool name")
+	var actionflag = flag.String("action", "enablepool", "Enable or Disable F5 pool members")
 	var usernameflag = flag.String("username", "admin", "Username for F5")
 	var passwordflag = flag.String("password", "*******", "Password for F5")
 	var hostflag = flag.String("host", "10.1.1.1", "F5 hostname and port combination ")
@@ -20,6 +21,7 @@ func main() {
 	//fmt.Println(os.Args[0],os.Args[1],os.Args[2])
 	flag.Parse()
 
+	fmt.Println(*poolnameflag)
 	fmt.Println(*actionflag)
 	fmt.Println(*usernameflag)
 	fmt.Println(*passwordflag)
@@ -27,12 +29,12 @@ func main() {
 
 	token := auth(*usernameflag, *passwordflag, *hostflag)
 
-	if *actionflag == "disable" {
+	if *actionflag == "disablepool" {
 		fmt.Println("Flag set to disable")
-		disablepool(token)
-	} else if *actionflag == "enable" {
+		disablepool(token, *poolnameflag, *hostflag)
+	} else if *actionflag == "enablepool" {
 		fmt.Println("Flag set to enable")
-		enablepool(token)
+		enablepool(token, *poolnameflag, *hostflag)
 	}
 
 }
@@ -61,7 +63,7 @@ func auth(username string, password string, host string) string {
 	return str
 }
 
-func disablepool(tokenarg string) {
+func disablepool(tokenarg string, poolname string, host string) {
 
 	type Items struct {
 		Items string `json:"Items"`
@@ -69,7 +71,7 @@ func disablepool(tokenarg string) {
 
 	client := resty.New()
 	client.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
-	resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{}`).Get("https://10.1.1.170:8443/mgmt/tm/ltm/pool/~Common~PoolA/members")
+	resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{}`).Get("https://" + host + "/mgmt/tm/ltm/pool/~Common~" + poolname + "/members")
 
 	fmt.Println(resp)
 
@@ -84,7 +86,7 @@ func disablepool(tokenarg string) {
 
 	result.ForEach(func(key, value gjson.Result) bool {
 		println(value.String())
-		resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{"session":"user-disabled"}`).Put("https://10.1.1.170:8443/mgmt/tm/ltm/pool/~Common~PoolA/members/~Common~" + value.String())
+		resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{"session":"user-disabled"}`).Put("https://" + host + "/mgmt/tm/ltm/pool/~Common~" + poolname + "/members/~Common~" + value.String())
 		fmt.Println(err)
 		fmt.Println(resp)
 		return true // keep iterating
@@ -92,7 +94,7 @@ func disablepool(tokenarg string) {
 
 }
 
-func enablepool(tokenarg string) {
+func enablepool(tokenarg string, poolname string, host string) {
 
 	type Items struct {
 		Items string `json:"Items"`
@@ -102,7 +104,7 @@ func enablepool(tokenarg string) {
 
 	client := resty.New()
 	client.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
-	resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{}`).Get("https://10.1.1.170:8443/mgmt/tm/ltm/pool/~Common~PoolA/members")
+	resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{}`).Get("https://" + host + "/mgmt/tm/ltm/pool/~Common~" + poolname + "/members")
 
 	fmt.Println(resp)
 
@@ -117,7 +119,7 @@ func enablepool(tokenarg string) {
 
 	result.ForEach(func(key, value gjson.Result) bool {
 		println(value.String())
-		resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{"session":"user-enabled"}`).Put("https://10.1.1.170:8443/mgmt/tm/ltm/pool/~Common~PoolA/members/~Common~" + value.String())
+		resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(`{"session":"user-enabled"}`).Put("https://" + host + "/mgmt/tm/ltm/pool/~Common~" + poolname + "/members/~Common~" + value.String())
 		fmt.Println(err)
 		fmt.Println(resp)
 		return true // keep iterating
