@@ -17,6 +17,8 @@ func main() {
 	var usernameflag = flag.String("username", "admin", "Username for F5")
 	var passwordflag = flag.String("password", "*******", "Password for F5")
 	var hostflag = flag.String("host", "10.1.1.1", "F5 hostname and port combination ")
+	var irulenameflag = flag.String("irulename", "irule", "F5 irule to update")
+	var irulepayloadflag = flag.String("irulepayload", "{}", "F5 irule payload")
 
 	flag.Parse()
 
@@ -25,6 +27,8 @@ func main() {
 	fmt.Println(*usernameflag)
 	fmt.Println(*passwordflag)
 	fmt.Println(*hostflag)
+	fmt.Println(*irulenameflag)
+	fmt.Println(*irulepayloadflag)
 
 	token := auth(*usernameflag, *passwordflag, *hostflag)
 
@@ -34,6 +38,10 @@ func main() {
 	} else if *actionflag == "enablepool" {
 		fmt.Println("Flag set to enable")
 		enablepool(token, *poolnameflag, *hostflag)
+	} else if *actionflag == "updateirule" {
+
+		updateirule(token, *irulenameflag, *irulepayloadflag, *hostflag)
+
 	}
 
 }
@@ -109,5 +117,19 @@ func enablepool(tokenarg string, poolname string, host string) {
 		fmt.Println(resp)
 		return true // keep iterating
 	})
+
+}
+
+func updateirule(tokenarg string, irulename string, irulepayload string, host string) {
+
+	client := resty.New()
+	client.SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
+	fmt.Println("test" + irulepayload)
+
+	resp, err := client.R().SetHeader("Content-Type", "application/json").SetHeader("X-F5-Auth-Token", tokenarg).SetBody(irulepayload).Put("https://" + host + "/mgmt/tm/ltm/rule/~Common~" + irulename)
+
+	fmt.Println(resp)
+
+	fmt.Println(err)
 
 }
