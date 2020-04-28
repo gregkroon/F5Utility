@@ -37,7 +37,7 @@ Original
 
 {"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}
 
-On the shell step / commandline ecapsulate this string with '' to escape teh special characters and make it  string literal
+On the shell step / commandline ecapsulate this string with '' to escape the special characters and make it  string literal
 
 i.e.
 
@@ -57,4 +57,19 @@ sudo tar -xvf go1.14.2.linux-amd64.tar.gz
 sudo mv go /usr/local
 
 
-2. 
+2. Example Shell script step in Harness
+
+Harness Variables :
+
+${workflow.variables.irulename} = CanaryRule
+${workflow.variables.action} = updateirule
+${workflow.variables.username} = admin
+${workflow.variables.password} = *****
+${workflow.variables.host} = 10.1.1.170:8443
+${workflow.variables.irulepayload} = '{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}'
+
+Shell script command with variables :
+
+
+cd /Users/gregorykroon/go/src/F5Utility/build
+./go_build_main_go -irulename ${workflow.variables.irulename} -action ${workflow.variables.action} -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host} -irulepayload=${workflow.variables.irulepayload}
