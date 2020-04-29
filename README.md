@@ -39,7 +39,7 @@ Original JSON
 
 Modified JSON
 
-On the shell step / commandline ecapsulate this string with '' to escape the special characters and make it  string literal
+On the shell step / commandline ecapsulate this string with ' to escape the special characters and make it  string literal
 
 i.e.
 
