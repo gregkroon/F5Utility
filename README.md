@@ -62,10 +62,15 @@ sudo mv go /usr/local
 Harness Variables :
 
 ${workflow.variables.irulename} = CanaryRule
+
 ${workflow.variables.action} = updateirule
+
 ${workflow.variables.username} = admin
+
 ${workflow.variables.password} = *****
+
 ${workflow.variables.host} = 10.1.1.170:8443
+
 ${workflow.variables.irulepayload} = '{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}'
 
 Shell script command with variables :
