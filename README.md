@@ -31,11 +31,11 @@ I-rule definition for a canary deployment is required for the utility to work
 
 #### A note on Escaping the JSON payload for an I-rule
 
-#### Example
-
-Original
+Original JSON
 
 {"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}
+
+Modified JSON
 
 On the shell step / commandline ecapsulate this string with '' to escape the special characters and make it  string literal
 
@@ -70,6 +70,17 @@ ${workflow.variables.irulepayload} = '{"apiAnonymous": "when HTTP_REQUEST {\n   
 
 Shell script command with variables :
 
+Irule 
 
 cd /Users/gregorykroon/go/src/F5Utility/build
 ./go_build_main_go -irulename ${workflow.variables.irulename} -action ${workflow.variables.action} -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host} -irulepayload=${workflow.variables.irulepayload}
+
+Enable pool
+
+cd /Users/gregorykroon/go/src/F5Utility/build
+./go_build_main_go -poolname PoolA -action enablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
+
+Disable pool
+
+cd /Users/gregorykroon/go/src/F5Utility/build
+./go_build_main_go -poolname PoolA -action disablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
