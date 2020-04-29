@@ -42,7 +42,7 @@ i.e.
 
 ## Implementation in Harness
 
-1. Create a delegate profile to pull go_build_main_go binary
+1. Create a delegate profile to pull go_build_main_go binary from the repo
 
 
 2. Example Shell script step in Harness
