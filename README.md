@@ -46,15 +46,7 @@ i.e.
 
 ## Implementation in Harness
 
-1. Create a delegate profile called golang with the commands below 
-   and add it to your delegate 
-
-sudo apt-get update
-sudo apt-get -y upgrade
-cd /tmp
-wget https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
-sudo tar -xvf go1.14.2.linux-amd64.tar.gz
-sudo mv go /usr/local
+1. Create a delegate profile to pull go_build_main_go binary
 
 
 2. Example Shell script step in Harness
