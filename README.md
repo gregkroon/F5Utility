@@ -12,15 +12,15 @@ built and tested against BIGIP-15.1.0.2-0.0.9
 
 ## Flags
 
--poolname
+-poolname = Big Ip target poolname
 
--action
+-action = enable pool , disablepool or updateirule
 
--username
+-username = admin user
 
--password
+-password = admin password
 
--host 
+-host = Big IP ip address port combination i.e. 10.1.1.170:8443
 
 #### Example pool enable/disable 
 
