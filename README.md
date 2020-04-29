@@ -8,6 +8,8 @@ of Blue/Green and Canary deployments .
 
 I-rule definition for a canary deployment is required for the utility to work 
 
+built and tested against BIGIP-15.1.0.2-0.0.9
+
 ## Flags
 
 -poolname
