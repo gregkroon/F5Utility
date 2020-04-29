@@ -51,33 +51,33 @@ i.e.
 
 2. Example Shell script step in Harness
 
-Harness Variables :
+    Harness Variables :
 
-${workflow.variables.irulename} = CanaryRule
+    ${workflow.variables.irulename} = CanaryRule
 
-${workflow.variables.action} = updateirule
+    ${workflow.variables.action} = updateirule
 
-${workflow.variables.username} = admin
+    ${workflow.variables.username} = admin
 
-${workflow.variables.password} = *****
+    ${workflow.variables.password} = *****
 
-${workflow.variables.host} = 10.1.1.170:8443
+    ${workflow.variables.host} = 10.1.1.170:8443
 
-${workflow.variables.irulepayload} = '{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}'
+    ${workflow.variables.irulepayload} = '{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}'
 
 Shell script command with variables :
 
-Irule 
+    Irule 
 
-cd /Users/gregorykroon/go/src/F5Utility/build
-./go_build_main_go -irulename ${workflow.variables.irulename} -action ${workflow.variables.action} -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host} -irulepayload=${workflow.variables.irulepayload}
+    cd /Users/gregorykroon/go/src/F5Utility/build
+    ./go_build_main_go -irulename ${workflow.variables.irulename} -action ${workflow.variables.action} -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host} -irulepayload=${workflow.variables.irulepayload}
 
-Enable pool
+    Enable pool
 
-cd /Users/gregorykroon/go/src/F5Utility/build
-./go_build_main_go -poolname PoolA -action enablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
+    cd /Users/gregorykroon/go/src/F5Utility/build
+    ./go_build_main_go -poolname PoolA -action enablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
 
-Disable pool
+    Disable pool
 
-cd /Users/gregorykroon/go/src/F5Utility/build
-./go_build_main_go -poolname PoolA -action disablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
+    cd /Users/gregorykroon/go/src/F5Utility/build
+    ./go_build_main_go -poolname PoolA -action disablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
