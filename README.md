@@ -22,7 +22,7 @@ built and tested against BIGIP-15.1.0.2-0.0.9
 
 -host 
 
-#### Example pool disable 
+#### Example pool enable/disable 
 
 -poolname PoolA -action disablepool -username admin -password ******* -host 10.1.1.170:8443
 
@@ -33,17 +33,11 @@ built and tested against BIGIP-15.1.0.2-0.0.9
 
 #### A note on Escaping the JSON payload for an I-rule
 
-Original JSON
-
-{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}
-
-Modified JSON
-
-On the shell step / commandline ecapsulate this string with ' to escape the special characters and make it  string literal
+On the shell step / commandline ecapsulate the JSON string with ' to escape the special characters and make it a string literal
 
 i.e.
 
-./go_build_main_go -irulename CanaryRule -action updateirule -username admin -password ****** -host 10.1.1.170:8443 -irulepayload='{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}'
+-irulepayload='{"apiAnonymous": "when HTTP_REQUEST {\n    log local0. \"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\" \n   HTTP::respond 200 content \"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\"\n}"}'
 
 
 ## Implementation in Harness
