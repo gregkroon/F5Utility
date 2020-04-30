@@ -24,11 +24,11 @@ built and tested against BIGIP-15.1.0.2-0.0.9
 
 #### Example pool enable/disable 
 
--poolname PoolA -action disablepool -username admin -password ******* -host 10.1.1.170:8443
+-poolname=PoolA -action=disablepool -username=admin -password=******* -host=10.1.1.170:8443
 
 #### Example I-rule update 
 
--irulename CanaryRule -action updateirule -username admin -password ******* -host 10.1.1.170:8443 -irulepayload="{\"apiAnonymous\": \"when HTTP_REQUEST {\n    log local0. \\"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\\" \n   HTTP::respond 200 content \\"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\\"\n}\"}"
+-irulename=CanaryRule -action=updateirule -username=admin -password=******* -host=10.1.1.170:8443 -irulepayload="{\"apiAnonymous\": \"when HTTP_REQUEST {\n    log local0. \\"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\\" \n   HTTP::respond 200 content \\"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\\"\n}\"}"
 
 
 #### A note on Escaping the JSON payload for an I-rule
@@ -66,14 +66,14 @@ Shell script command with variables :
     Irule 
 
     cd /Users/gregorykroon/go/src/F5Utility/build
-    ./go_build_main_go -irulename ${workflow.variables.irulename} -action ${workflow.variables.action} -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host} -irulepayload=${workflow.variables.irulepayload}
+    ./go_build_main_go -irulename=${workflow.variables.irulename} -action=${workflow.variables.action} -username=${workflow.variables.username} -password=${workflow.variables.password} -host=${workflow.variables.host} -irulepayload=${workflow.variables.irulepayload}
 
     Enable pool
 
     cd /Users/gregorykroon/go/src/F5Utility/build
-    ./go_build_main_go -poolname PoolA -action enablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
+    ./go_build_main_go -poolname=PoolA -action=enablepool  -username=${workflow.variables.username} -password=${workflow.variables.password} -host=${workflow.variables.host}
 
     Disable pool
 
     cd /Users/gregorykroon/go/src/F5Utility/build
-    ./go_build_main_go -poolname PoolA -action disablepool  -username ${workflow.variables.username} -password ${workflow.variables.password} -host ${workflow.variables.host}
+    ./go_build_main_go -poolname=PoolA -action=disablepool  -username=${workflow.variables.username} -password=${workflow.variables.password} -host=${workflow.variables.host}
