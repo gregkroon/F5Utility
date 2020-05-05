@@ -30,6 +30,11 @@ built and tested against BIGIP-15.1.0.2-0.0.9
 
 -irulename=CanaryRule -action=updateirule -username=admin -password=******* -host=10.1.1.170:8443 -irulepayload="{\"apiAnonymous\": \"when HTTP_REQUEST {\n    log local0. \\"[IP::client_addr]:[TCP::client_port]: Connected to [virtual name] [IP::local_addr]:[TCP::local_port]\\" \n   HTTP::respond 200 content \\"Connected to [virtual name] [IP::local_addr]:[TCP::local_port] from [IP::client_addr]:[TCP::client_port]\\"\n}\"}"
 
+#### Example Pool query update (Blue/Green)
+
+Note this querys the first node in a given pool and returns true or false for enabled/disabled 
+
+
 
 #### A note on Escaping the JSON payload for an I-rule
 
