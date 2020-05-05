@@ -32,7 +32,7 @@ built and tested against BIGIP-15.1.0.2-0.0.9
 
 #### Example Pool query update (Blue/Green)
 
-Note this querys the first node in a given pool and returns true or false for enabled/disabled 
+Note this queries the first node in a given pool and returns enabled/disabled 
 
 
 
