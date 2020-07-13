@@ -85,3 +85,5 @@ Harness shell script command with variables :
 
 
 ![Enable Disable workflow](https://github.com/gregkroon/F5Utility/blob/master/F5%20Enable%20Disable.png)
+
+![Enable Disable script](https://github.com/gregkroon/F5Utility/blob/master/F5%20Enable%20Disable%20script.png)
