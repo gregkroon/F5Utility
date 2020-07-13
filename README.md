@@ -84,3 +84,4 @@ Harness shell script command with variables :
     ./go_build_main_go -poolname=PoolA -action=disablepool  -username=${workflow.variables.username} -password=${workflow.variables.password} -host=${workflow.variables.host}
 
 
+![Enable Disable workflow](/F5 Enable Disable.png)
