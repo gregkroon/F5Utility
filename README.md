@@ -99,3 +99,8 @@ Harness shell script command with variables :
 
 
 ![Deploy Irule script](https://github.com/gregkroon/F5Utility/blob/master/F5%20deploy%20irule%20script.png)
+
+
+### Build Notes :
+
+For Linux build with GOOS=linux;GOARCH=amd64
