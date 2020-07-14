@@ -49,6 +49,8 @@ i.e.
 
 1. Create a delegate profile to pull go_build_main_go binary from the repo
 
+   S3 hosted binary here : https://f5utility.s3-ap-southeast-2.amazonaws.com/go_build_main_go_linux
+
 
 2. Example Shell script step in Harness
 
