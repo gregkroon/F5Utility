@@ -103,4 +103,4 @@ Harness shell script command with variables :
 
 ### Build Notes :
 
-For Linux build with GOOS=linux;GOARCH=amd64
+For Linux build with GOOS=linux;GOARCH=amd64 environment variables
